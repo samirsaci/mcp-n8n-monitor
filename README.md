@@ -1,4 +1,8 @@
-# N8N Monitor MCP Server
+# n8n Monitor MCP Server [![Watch Tutorial](https://img.shields.io/badge/▶_Watch_Tutorial-red?style=for-the-badge)](https://youtu.be/oJzNnHIusZs)
+
+A Model Context Protocol (MCP) server that provides real-time monitoring, health analysis, and error debugging for n8n workflow automation instances.
+
+## 🎯 Overview
 
 A Model Context Protocol (MCP) server that provides real-time monitoring, health analysis, and error debugging for n8n workflow automation instances.
 
@@ -7,21 +11,30 @@ A Model Context Protocol (MCP) server that provides real-time monitoring, health
 This MCP server connects Claude AI to your n8n instance, enabling intelligent monitoring and debugging of workflow executions through natural language conversations.
 
 **Key Capabilities:**
+
 - 📊 Real-time workflow health monitoring
 - 🔍 Detailed error forensics and debugging
 - 📈 Execution metrics and KPI tracking
 - 🚨 Automated failure detection and alerting
 
 ## 🏗️ Architecture
+
 ```
 Claude Desktop ←→ MCP Server ←→ N8nMonitor ←→ n8n Webhook ←→ n8n API
 ```
 
 The server acts as a bridge between Claude and your n8n instance, translating natural language requests into structured API calls.
 
+## 🎥 Watch the Tutorial
+
+See the full demo and step-by-step setup guide on YouTube:
+
+[![Tutorial + Code](https://www.samirsaci.com/content/images/2025/11/temp-8.png)](https://youtu.be/oJzNnHIusZs)
+
 ## 📦 Installation
 
 ### Prerequisites
+
 - Python 3.10+
 - Self-hosted n8n instance
 - Claude Desktop app
@@ -29,12 +42,14 @@ The server acts as a bridge between Claude and your n8n instance, translating na
 ### Setup
 
 1. **Clone the repository**
+
 ```bash
 git clone <your-repo-url>
 cd mcp_n8n
 ```
 
 2. **Install dependencies**
+
 ```bash
 pip install -r requirements.txt
 # or using uv
@@ -44,6 +59,7 @@ uv pip install -r requirements.txt
 3. **Configure environment variables**
 
 Create a `.env` file in the project root:
+
 ```bash
 N8N_WEBHOOK_URL=https://your-n8n-instance.com/webhook/your-webhook-id
 ```
@@ -51,6 +67,7 @@ N8N_WEBHOOK_URL=https://your-n8n-instance.com/webhook/your-webhook-id
 4. **Configure n8n webhook**
 
 Use the n8n workflow shared [here] that contains three webhooks connected to to your n8n instance to handles these actions:
+
 - `get_active_workflows`: get all the workflows that are currently active in your instancce
 - `get_workflow_executions`
 - `get_execution_details`
@@ -60,7 +77,6 @@ See [n8n API reference](https://docs.n8n.io/api/api-reference/#tag/execution/get
 5. **Add to Claude Desktop**
 
 Edit your Claude Desktop config file that you can reach in Claude Desktop UI: `File > Settings > Developer > Edit Config`
-
 
 ```json
 {
@@ -83,16 +99,19 @@ Once configured, you can interact with your n8n instance through Claude using na
 ### Example Queries
 
 **Health Monitoring:**
+
 - "Show me all active workflows"
 - "What's the health status of my n8n instance?"
 - "Generate a health report for the last 100 executions"
 
 **Error Debugging:**
+
 - "Debug errors in workflow `7uvA2XQPMB5l4kI5`"
 - "What's causing failures in my data processing workflow?"
 - "Show me error patterns across all workflows"
 
 **Execution Tracking:**
+
 - "Show me execution metrics for the last 50 runs"
 - "Which workflows are failing most frequently?"
 - "What's the average execution time?"
@@ -100,21 +119,26 @@ Once configured, you can interact with your n8n instance through Claude using na
 ## 🛠️ Available Tools
 
 ### 1. `get_active_workflows()`
+
 Lists all active workflows with IDs, names, and metadata.
 
 **Returns:**
+
 - Total active workflows count
 - Workflow details (ID, name, created/updated dates)
 - Summary statistics
 
 ### 2. `get_workflow_executions(limit=50, include_kpis=True)`
+
 Fetches recent workflow executions with performance metrics.
 
 **Parameters:**
+
 - `limit`: Number of executions to retrieve (1-100)
 - `include_kpis`: Include calculated KPIs (default: true)
 
 **Returns:**
+
 - Execution summary (total, success/failure counts)
 - Success/failure rates
 - Execution timing metrics (avg, min, max)
@@ -123,12 +147,15 @@ Fetches recent workflow executions with performance metrics.
 - Workflows needing attention
 
 ### 3. `get_workflow_health_report(limit=50)`
+
 Generates comprehensive health analysis for all workflows.
 
 **Parameters:**
+
 - `limit`: Number of recent executions to analyze
 
 **Returns:**
+
 - Overall health status (🟢 Healthy / 🟡 Warning / 🔴 Critical)
 - Problematic workflows list
 - Healthy workflows list
@@ -136,12 +163,15 @@ Generates comprehensive health analysis for all workflows.
 - Actionable alerts
 
 ### 4. `get_error_executions(workflow_id)`
+
 Retrieves detailed error debugging information for a specific workflow.
 
 **Parameters:**
+
 - `workflow_id`: The workflow ID to analyze (e.g., "CGvCrnUyGHgB7fi8")
 
 **Returns:**
+
 - Error count and detailed error list
 - Failed node information (name, type, position)
 - Error messages and severity levels
@@ -159,35 +189,41 @@ Retrieves detailed error debugging information for a specific workflow.
 ## 🧪 Testing
 
 Run the test suite to validate functionality:
+
 ```bash
 python test.py
 ```
 
 This will execute three test scenarios:
+
 1. Execution tracking with KPIs
 2. Health report generation
 3. Error execution debugging
 
 Test results are saved to:
+
 - `execution_data.json`
 - `health_report.json`
 - `error_executions_test.json`
 
 ## 📝 Logging
 
-All operations are logged to `n8n_monitor.log`. 
+All operations are logged to `n8n_monitor.log`.
 
 **View live logs:**
+
 ```bash
 tail -n 100 -f n8n_monitor.log
 ```
 
 **Check recent activity:**
+
 ```bash
 tail -n 50 n8n_monitor.log
 ```
 
 ## 📁 Project Structure
+
 ```
 .
 ├── server.py                    # MCP server with tool definitions
@@ -204,15 +240,16 @@ tail -n 50 n8n_monitor.log
 
 ### Environment Variables
 
-| Variable | Description | Required |
-|----------|-------------|----------|
-| `N8N_WEBHOOK_URL` | Your n8n webhook endpoint | Yes |
+| Variable          | Description               | Required |
+| ----------------- | ------------------------- | -------- |
+| `N8N_WEBHOOK_URL` | Your n8n webhook endpoint | Yes      |
 
 ### n8n Webhook Requirements
 
 The n8n webhook accepts POST requests with the following action payloads:
 
 **Get Active Workflows:**
+
 ```json
 {
   "action": "get_active_workflows"
@@ -220,6 +257,7 @@ The n8n webhook accepts POST requests with the following action payloads:
 ```
 
 **Get Executions:**
+
 ```json
 {
   "action": "get_workflow_executions",
@@ -228,6 +266,7 @@ The n8n webhook accepts POST requests with the following action payloads:
 ```
 
 **Get Error Details:**
+
 ```json
 {
   "action": "get_execution_details",
@@ -239,16 +278,19 @@ The n8n webhook accepts POST requests with the following action payloads:
 ## 🐛 Troubleshooting
 
 ### Server not connecting
+
 - Verify webhook URL is correct in `.env`
 - Check n8n instance is accessible
 - Review logs: `tail -f n8n_monitor.log`
 
 ### No executions returned
+
 - Ensure your n8n instance has execution history
 - Check webhook is properly configured
 - Verify webhook action routes are working
 
 ### Error executions showing 0 results
+
 - Confirm workflow ID is correct
 - Check if workflow actually has failed executions
 - Verify `get_execution_details` webhook route works
@@ -262,6 +304,7 @@ The n8n webhook accepts POST requests with the following action payloads:
 ## 🤝 Contributing
 
 Contributions are welcome! Please ensure:
+
 - Tests pass: `python test.py`
 - Logs are comprehensive
 - Documentation is updated
