@@ -1,0 +1,20 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+*.pyc
+
+# Virtual environments (that was setup by uvenv)
+.venv
+
+# Ignore files used for Achiving (Samir: this was an initial test that failed)
+/utils/n8n_monitor.py
+
+# Ignore environment variables (Samir: Very important!)
+.env
+
+# Ignore your logs (Samir: we don't need them haha)
+n8n_monitor.log
