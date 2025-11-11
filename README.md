@@ -84,7 +84,11 @@ Edit your Claude Desktop config file that you can reach in Claude Desktop UI: `F
     "bash",
     "-lc",
     "cd ~/path/to/mcp_n8n && uv run --with mcp[cli] mcp run server.py"
-    ]
+    ],
+      "env": {
+        "N8N_WEBHOOK_URL": "<YOUR_WEBHOOK_URL>"
+      }
+    }
 }
 ```
 
