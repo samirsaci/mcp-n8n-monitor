@@ -4,10 +4,6 @@ A Model Context Protocol (MCP) server that provides real-time monitoring, health
 
 ## 🎯 Overview
 
-A Model Context Protocol (MCP) server that provides real-time monitoring, health analysis, and error debugging for n8n workflow automation instances.
-
-## 🎯 Overview
-
 This MCP server connects Claude AI to your n8n instance, enabling intelligent monitoring and debugging of workflow executions through natural language conversations.
 
 **Key Capabilities:**
